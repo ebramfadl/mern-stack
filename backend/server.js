@@ -13,5 +13,7 @@ connectDB()
 server.listen(port,() => console.log(`Server is listening on port ${port}`))
 
 const goalRoutes = require('./routes/goalRoute');
+const userRoutes = require('./routes/userRoute')
 server.use('/api/goal',goalRoutes);
+server.use('/api/user',userRoutes)
 server.use(errorHandler);
