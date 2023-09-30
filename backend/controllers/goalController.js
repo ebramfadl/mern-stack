@@ -22,6 +22,10 @@ const createGoal = asyncHandler(async (req,res) => {
 })
 
 const updateGoal = asyncHandler(async (req,res) => {
+    if(!mongoose.Types.objectId.isValid(id)){
+        throw new Error('Invalid id')
+        res.status(404);
+    }
     const id =  new mongoose.Types.ObjectId(req.params.id);
     const goal = await Goal.findById(id);
     validateGoalAndUser(goal,req.user.id,res);
@@ -39,6 +43,7 @@ const deleteGoal = asyncHandler( async (req,res) => {
 
 
 const validateGoalAndUser = (goal,id,res) => {
+
     if (!goal){
         res.status(400);
         throw new Error('Goal not found');
