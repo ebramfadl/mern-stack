@@ -1,27 +1,33 @@
 import {useEffect, useState} from "react";
-import GoalDetails from "../components/GoalDetails";
+import WorkoutDetails from "../components/WorkoutDetails";
 
-const Home = () =>{
-    const [goals,setGoals] = useState(null)
-    useEffect( () => {
-        const fetchGoals = async () => {
-            const response = await fetch('/api/goal')
+import Login from "./Login";
+
+const Home = () => {
+    const [workouts, setWorkouts] = useState(null)
+
+    useEffect(() => {
+        const fetchWorkouts = async () => {
+            const response = await fetch('/api/workouts')
             const json = await response.json()
-            if (response.ok){
-                setGoals(json)
+
+            if (response.ok) {
+                setWorkouts(json)
             }
         }
-        fetchGoals()
+
+        fetchWorkouts()
     }, [])
 
-    return(
-        <div className={home}>
-            <h2>Home</h2>
-            <div className={goals}>
-                {goals && goals.map(goal => (
-                    <GoalDetails goal={goal} key={goal.id} />
+    return (
+        <div className="home">
+            <div className="workouts">
+                {workouts && workouts.map(workout => (
+                    <WorkoutDetails workout={workout} key={workout._id} />
                 ))}
             </div>
         </div>
     )
 }
+
+export default Home
