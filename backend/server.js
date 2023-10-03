@@ -20,4 +20,4 @@ server.use('/api/goal',goalRoutes);
 server.use('/api/user',userRoutes)
 server.use('/api/workouts', workoutRoutes)
 server.use(errorHandler);
-console.log("print modified in main")
+console.log("print modified in main blabla")
